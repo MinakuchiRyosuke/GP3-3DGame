@@ -4,6 +4,9 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 3;
     [SerializeField] float rotateSpeed = 20;
+    [SerializeField] int hp = 2;
+    [SerializeField] float invincibleTimeMax = 0.5f;
+    [SerializeField] float knockbackSpeed = 5;
 
     Rigidbody rb;
 
@@ -43,6 +46,19 @@ public class Enemy : MonoBehaviour
             Vector3 forward = transform.forward;
             transform.forward = Vector3.Slerp(forward, rotateTarget,
                 rotateSpeed * Time.deltaTime);
+        }
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        var attackObj = collision.gameObject.GetComponent<AttackObject>();
+        if (attackObj != null)
+        {
+            hp -= attackObj.power;
+            if (hp <= 0)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

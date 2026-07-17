@@ -11,6 +11,9 @@ public class Player : MonoBehaviour
     [SerializeField] float groundNormalYMin = 0.7f;
     [SerializeField] float groundDamping = 8f;
     [SerializeField] float airDamping = 0.5f;
+    [SerializeField] GameObject firePrefab;
+    [SerializeField] float fireSpeed;
+    [SerializeField] Vector3 fireOffset;
 
     PlayerInput playerInput;
     Rigidbody rb;
@@ -90,6 +93,18 @@ public class Player : MonoBehaviour
         {
             Vector3 jumpVec = new Vector3(0, jumpSpeed, 0);
             rb.AddForce(jumpVec, ForceMode.VelocityChange);
+        }
+
+        // 攻撃
+        if (playerInput.actions["Attack"].WasPressedThisFrame())
+        {
+            var position = transform.position + transform.TransformVector(fireOffset);
+            var fireObj = Object.Instantiate(firePrefab, position, transform.rotation);
+            var fireRB = fireObj.GetComponent<Rigidbody>();
+            if (fireRB != null)
+            {
+                fireRB.linearVelocity = transform.forward * fireSpeed;
+            }
         }
     }
 
