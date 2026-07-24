@@ -1,0 +1,14 @@
+diff a/Assets/Scenes/GameScene.unity b/Assets/Scenes/GameScene.unity	(rejected hunks)
+@@ -22666,6 +22682,12 @@ MonoBehaviour:
+   groundNormalYMin: 0.7
+   groundDamping: 8
+   airDamping: 0.2
++  firePrefab: {fileID: 4818970324401746577, guid: 59c516dceb031b64ba6cb9cd59bb41f0, type: 3}
++  fireSpeed: 20
++  fireOffset: {x: 0, y: 0.9, z: 0.2}
++  hp: 10
++  invincibleTimeMax: 0.5
++  knockbackSpeed: 10
+ --- !u!54 &1642013321
+ Rigidbody:
+   m_ObjectHideFlags: 0
